@@ -38,7 +38,9 @@ void Server::onNewConnection()
     while(socket.hasPendingConnections())
     {
         QTcpSocket *client = socket.nextPendingConnection();
-        client_description[client] = QString("%1:%2").arg(client->peerAddress().toString()).arg(client->peerPort());
+        QString client_description = QString("%1:%2").arg(client->peerAddress().toString()).arg(client->peerPort());
+        qDebug() << "Client connected:" << client_description;
+        clients_description[client] = client_description;
         connect(client, &QTcpSocket::readyRead, this, &Server::onDataCome);
         connect(client, &QTcpSocket::disconnected, this,&Server::onClientDisconnected);
     }
@@ -57,8 +59,8 @@ void Server::onDataCome()
 void Server::onClientDisconnected()
 {
     QTcpSocket *client = qobject_cast<QTcpSocket *>(sender());
-    qDebug() << "Client disconnected:" << client_description[client];
-    client_description.remove(client);
+    qDebug() << "Client disconnected:" << clients_description[client];
+    clients_description.remove(client);
     client->deleteLater();
 }
 

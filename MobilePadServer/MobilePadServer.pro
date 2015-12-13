@@ -6,10 +6,16 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES += main.cpp \
+win32:LIBS += -lUser32
+
+SOURCES += \
+    main.cpp \
     server.cpp \
     controller.cpp \
     commandexecutor.cpp
+
+win32:SOURCES += \
+    commandexecutor_win.cpp
 
 HEADERS += \
     server.h \

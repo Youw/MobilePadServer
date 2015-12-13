@@ -24,7 +24,7 @@ private slots:
 
 private:
     QTcpServer socket;
-    QHash<QTcpSocket*, QString> client_description;
+    QHash<QTcpSocket*, QString> clients_description;
 };
 
 #endif // SERVER_H
