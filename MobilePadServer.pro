@@ -3,6 +3,7 @@ QT = core network
 TARGET = MobilePadServer
 CONFIG += console
 CONFIG -= app_bundle
+DESTDIR = $$PWD/bin
 
 TEMPLATE = app
 
